@@ -1,0 +1,9 @@
+artifacts/
+.apktool-framework/
+.jadx-config/
+.jadx-cache/
+prep/
+*.tar.gz
+__pycache__/
+*.py[cod]
+.DS_Store
