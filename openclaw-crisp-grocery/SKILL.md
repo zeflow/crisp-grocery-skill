@@ -16,7 +16,7 @@ This skill helps with user-authorized Crisp grocery planning and account inspect
 - Checkout, payment, address, phone, account deletion, support messages, and order cancellation are out of scope unless the user gives exact, action-specific confirmation.
 - Do not bypass authentication, rate limits, bot checks, TLS, app controls, or server-side protections.
 - Keep traffic low volume and user-driven. Cache API responses during a session instead of repeatedly fetching the same endpoint.
-- Keep the app version/User-Agent configurable. If `/client` reports an `outdated` block, stop and ask the user for an updated app version.
+- Keep the app build/User-Agent configurable. The Android app sends `crisp/app/android/<buildNumber>`, not the display version name. If `/client` reports an `outdated` block, stop and ask the user to update the app and use the new installed build number.
 
 ## Configuration
 
@@ -25,7 +25,7 @@ Preferred environment variables:
 - `CRISP_BEARER_TOKEN`: existing user-authorized bearer token.
 - `CRISP_TOKEN_FILE`: path to a local token file. Use this only if `CRISP_BEARER_TOKEN` is unset.
 - `CRISP_API_BASE`: default `https://crispapp.nl/v1`.
-- `CRISP_USER_AGENT`: default `crisp/app/android/2.125`; update when Crisp releases a newer app.
+- `CRISP_USER_AGENT`: default `crisp/app/android/634`; update from the installed Android app build number when Crisp releases a newer app.
 - `CRISP_OUTPUT_DIR`: default `artifacts/api`.
 
 Token acquisition flow, when the user wants to log in:
@@ -39,7 +39,7 @@ Token acquisition flow, when the user wants to log in:
 
 ## Workflow
 
-1. Check `/client` first for authorization and app-version status.
+1. Check `/client` first for authorization and app-version status. If using Android, derive the user agent from the installed app `versionCode`/build number, for example `crisp/app/android/634`.
 2. For delivery windows and fees, fetch `/basket/main`.
 3. For personalization, fetch `/yourShop` and, when useful, `/order/history`.
 4. For offers, fetch `/promo/current` and rank by percentage, euro savings, user history, menu relevance, and dietary fit.

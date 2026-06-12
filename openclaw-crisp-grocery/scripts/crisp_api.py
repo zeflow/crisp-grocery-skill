@@ -21,7 +21,7 @@ from typing import Any
 
 
 DEFAULT_BASE = "https://crispapp.nl/v1"
-DEFAULT_UA = "crisp/app/android/2.125"
+DEFAULT_UA = "crisp/app/android/634"
 
 
 def token_from_env_or_file(args: argparse.Namespace) -> str:
@@ -152,7 +152,7 @@ def summarize(kind: str, payload: Any) -> None:
                 "lactoseFree": (p.get("tags") or {}).get("lactoseFree"),
             })
         rows.sort(key=lambda r: (r["percent"] or 0, money(r["saves"])), reverse=True)
-        print(json.dumps(rows, ensure_ascii=False, indent=2))
+        print(json.dumps( rows, ensure_ascii=False, indent=2))
     elif kind == "orders":
         rows = []
         for wrapper in payload.get("data") or []:

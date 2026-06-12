@@ -6,7 +6,7 @@ This reference is sanitized. It intentionally contains no user token, email, add
 
 - API base: `https://crispapp.nl/v1`
 - Auth header: `Authorization: bearer <token>`
-- Typical mobile user agent: `crisp/app/android/<version>`
+- Typical mobile user agent: `crisp/app/android/<buildNumber>`, where `<buildNumber>` is Android `versionCode`, not the display `versionName`.
 - Image URL format: `https://crispapp.nl/blob/<blob_id>?thumb=<size>`
 
 Keep `CRISP_USER_AGENT` configurable and validate it with `/client`.
